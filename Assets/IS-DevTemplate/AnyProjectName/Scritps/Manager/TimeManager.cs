@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using ISDevTemplate.Manager;
-using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// タイムの管理
@@ -16,19 +14,35 @@ public class TimeManager : MonoBehaviour
     [Header("制限時間")]
     private float _limitTime;
 
+    [SerializeField]
+    private Text _timerText;
+
     private float _timer;
+
+    private void Start()
+    {
+        _timer = _limitTime;
+    }
 
     private void Update()
     {
         if (GameManager.Instance.IsGameFinish) return;
 
-        _timer += Time.deltaTime;
+        UpdateTimer();
+        UpdateText();
         CheckTimeOver();
+    }
+
+    private void UpdateTimer()
+    {
+        _timer -= Time.deltaTime;
     }
 
     private void CheckTimeOver()
     {
-        if (_timer < _limitTime) return;
+        if (_timer <= 0f) return;
+
+        UpdateText(0);
 
         if(PointManager.Instance.CanWin)
         {
@@ -38,5 +52,15 @@ public class TimeManager : MonoBehaviour
         {
             GameManager.Instance.GameOver();
         }
+    }
+
+    private void UpdateText()
+    {
+        _timerText.text = _timer.ToString("F0");
+    }
+
+    private void UpdateText(float time)
+    {
+        _timerText.text = time.ToString("F0");
     }
 }

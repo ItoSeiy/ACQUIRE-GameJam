@@ -9,6 +9,8 @@ namespace ISDevTemplate.Manager
     {
         public bool IsGameFinish { get; private set; } = false;
 
+        public ResultData ResultData { get; private set; }
+
         [SerializeField]
         private string _resultSceneName = "Result";
 
@@ -26,8 +28,6 @@ namespace ISDevTemplate.Manager
 
         //[SerializeField]
         //private float _fadeDuration = 0.5f;
-
-        private ResultData _resultData;
 
         public event Action OnGameClear;
 
@@ -50,6 +50,8 @@ namespace ISDevTemplate.Manager
             IsGameFinish = true;
             OnGameClear?.Invoke();
 
+            ResultData = new ResultData(PointManager.Instance.Point, ResultType.GameClear);
+
             SceneLoder.Instance.LoadScene(_resultSceneName);
 
             print("GameClear");
@@ -65,6 +67,8 @@ namespace ISDevTemplate.Manager
         {
             IsGameFinish = true;
             OnGameOver?.Invoke();
+
+            ResultData = new ResultData(PointManager.Instance.Point, ResultType.GameOver);
 
             SceneLoder.Instance.LoadScene(_resultSceneName);
 
