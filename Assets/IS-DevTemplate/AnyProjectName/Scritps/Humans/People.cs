@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.ParticleSystem;
+using DG.Tweening;
+using System.Net;
 
 public class People : MonoBehaviour
 {
@@ -22,7 +24,10 @@ public class People : MonoBehaviour
     private float _verticalWidth = 0;
 
     [SerializeField, Tooltip("持っているスコア")]
-    public int _score = 0;
+    private int _score = 0;
+
+    [SerializeField, Tooltip("初めに保持するスケール")]
+    private Vector3 _originScale;
 
     /// <summary>スポーンの中心点</summary>
     public Transform _centerPoint = null;
@@ -35,6 +40,9 @@ public class People : MonoBehaviour
 
     /// <summary>ランダムな進行方向</summary>
     private Vector3 _randomVelo;
+
+    /// <summary>DoTween用の変数</summary>
+    private Tween tween;
 
     /// <summary> 時間計測用 </summary>
     private float _timer = 0;
@@ -51,6 +59,8 @@ public class People : MonoBehaviour
 
                 Vector3 vero;
 
+                Vector3 playerPosition;
+
                 if (transform.position.x < _centerPoint.position.x) vero = new Vector3(_speed, 0, 0);
                 else vero = new Vector3(-_speed, 0, 0);
 
@@ -58,6 +68,10 @@ public class People : MonoBehaviour
 
                 if (_timer > _nextMoveTime)//一定時間後それぞれの行動に移行
                 {
+                    _moveState = MoveState.Suction;
+                    _player = FindObjectOfType<Player>().gameObject;
+                    return;
+
                     if (Random.Range(0, 2) < 1)
                     {
                         if (this.name == "PeopleSanple(Clone)")//一般人はランダムに移動
@@ -69,8 +83,7 @@ public class People : MonoBehaviour
                         else if (this.name == "Yakuza(Clone)")//ヤクザ類は特攻
                         {
                             _moveState = MoveState.PlayerAtack;
-                            _player = GameObject.Find("GameObject");//playerの代わり
-                            //_player = FindObjectOfType<Player>().gameObject; //実際に使うもの
+                            _player = FindObjectOfType<Player>().gameObject;
                             _timer = 0;
                         }
                     }
@@ -89,8 +102,13 @@ public class People : MonoBehaviour
                 }
                 break;
             case MoveState.PlayerAtack:
-                Vector3 playerPosition = new Vector3(_player.transform.position.x, _player.transform.position.y, transform.position.z);
+                playerPosition = new Vector3(_player.transform.position.x, _player.transform.position.y, transform.position.z);
                 transform.position = Vector3.MoveTowards(transform.position, playerPosition, _speed);
+                break;
+            case MoveState.Suction:
+                playerPosition = new Vector3(_player.transform.position.x, _player.transform.position.y, transform.position.z);
+                transform.position = Vector3.MoveTowards(transform.position, playerPosition, _speed);
+                tween = transform.DOScale(Vector3.zero, 2f).SetAutoKill(false).OnComplete(SuctionDestroy);//目標のスケール値と演出時間
                 break;
         }
 
@@ -111,7 +129,8 @@ public class People : MonoBehaviour
     {
         AfterResporn,
         RandamWalk,
-        PlayerAtack
+        PlayerAtack,
+        Suction
     }
 
     bool _isActrive = false;
@@ -130,6 +149,7 @@ public class People : MonoBehaviour
     public void Create()//生成時
     {
         _timer = 0.0f;
+        transform.localScale = _originScale;
         _isActrive = true;
     }
 
@@ -139,5 +159,10 @@ public class People : MonoBehaviour
         _moveState = MoveState.AfterResporn;
         _isActrive = false;
         this.gameObject.SetActive(false);
+    }
+
+    private void SuctionDestroy()
+    {
+        PointManager.Instance.AddPoint(_score); Destroy();
     }
 }

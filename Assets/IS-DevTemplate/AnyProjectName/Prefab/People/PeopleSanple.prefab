@@ -101,6 +101,7 @@ MonoBehaviour:
   _width: 5
   _verticalWidth: 2.8
   _score: 0
+  _originScale: {x: 0.1, y: 0.1, z: 1}
   _centerPoint: {fileID: 0}
 --- !u!70 &-8612899811340676884
 CapsuleCollider2D:
