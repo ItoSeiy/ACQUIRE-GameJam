@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2106412471648443378}
   - component: {fileID: 2269095849204849190}
   m_Layer: 0
-  m_Name: PeopleSanple
+  m_Name: Yakuza
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6affb877eb9e23c45be1f71cada04623, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0a2ee38c6baeb3642ad5bb20bd381c20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -180,19 +180,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5393194010268487411, guid: e389ccba6caa60343a1f75d569c4f306, type: 3}
       propertyPath: _objParam._params.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5393194010268487411, guid: e389ccba6caa60343a1f75d569c4f306, type: 3}
       propertyPath: _objParam._params.Array.data[0].name
       value: CommonPeople
       objectReference: {fileID: 0}
     - target: {fileID: 5393194010268487411, guid: e389ccba6caa60343a1f75d569c4f306, type: 3}
+      propertyPath: _objParam._params.Array.data[1].name
+      value: Yakuza
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393194010268487411, guid: e389ccba6caa60343a1f75d569c4f306, type: 3}
       propertyPath: _objParam._params.Array.data[0].prefab
       value: 
       objectReference: {fileID: 765989177517318583, guid: 7c3a473a1e17e71428e0953e5755b9b5, type: 3}
     - target: {fileID: 5393194010268487411, guid: e389ccba6caa60343a1f75d569c4f306, type: 3}
+      propertyPath: _objParam._params.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 765989177517318583, guid: 12039786a35264b40993f3eb329fd38a, type: 3}
+    - target: {fileID: 5393194010268487411, guid: e389ccba6caa60343a1f75d569c4f306, type: 3}
       propertyPath: _objParam._params.Array.data[0].maxCount
-      value: 5
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393194010268487411, guid: e389ccba6caa60343a1f75d569c4f306, type: 3}
+      propertyPath: _objParam._params.Array.data[1].maxCount
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e389ccba6caa60343a1f75d569c4f306, type: 3}
@@ -374,10 +386,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obp: {fileID: 1809106646}
   _maxCount: 0
+  _typeCount: 1
   _appearanceInterval: 0.1
   _centerPoint: {fileID: 2074288276}
-  _width: 2.8
-  _verticalWidth: 5
+  _width: 5
+  _verticalWidth: 2.8
 --- !u!114 &1809106646 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5393194010268487411, guid: e389ccba6caa60343a1f75d569c4f306, type: 3}

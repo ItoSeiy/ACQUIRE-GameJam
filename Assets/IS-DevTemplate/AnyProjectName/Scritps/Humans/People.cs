@@ -20,12 +20,14 @@ public class People : MonoBehaviour
     [SerializeField, Tooltip("ゲーム画面の縦幅")]
     private float _verticalWidth = 0;
 
+    [SerializeField, Tooltip("持っているスコア")]
+    public int _score = 0;
+
     /// <summary>スポーンの中心点</summary>
     public Transform _centerPoint = null;
 
-
-    [SerializeField, Tooltip("持っているスコア")]
-    public int _score = 0;
+    /// <summary>攻撃する際にプレイヤーを取得</summary>
+    private GameObject _player = null;
 
     /// <summary>動きのState</summary>
     private MoveState _moveState = MoveState.AfterResporn;
@@ -53,13 +55,22 @@ public class People : MonoBehaviour
 
                 transform.position += vero;
 
-                if (_timer > _nextMoveTime)//一定時間後ランダムに移動
+                if (_timer > _nextMoveTime)//一定時間後それぞれの行動に移行
                 {
                     if (Random.Range(0, 2) < 1)
                     {
-                        _moveState = MoveState.RandamWalk;
-                        _randomVelo = new Vector3(Random.value, Random.value, 0);
-                        _timer = 0;
+                        if (this.name == "PeopleSanple(Clone)")//一般人はランダムに移動
+                        {
+                            _moveState = MoveState.RandamWalk;
+                            _randomVelo = new Vector3(Random.value, Random.value, 0);
+                            _timer = 0;
+                        }
+                        else if(this.name == "Yakuza(Clone)")//ヤクザ類は特攻
+                        {
+                            _moveState = MoveState.PlayerAtack;
+                            _player = FindObjectOfType<Camera>().gameObject;
+                            _timer = 0;
+                        }
                     }
                 }
                 break;
@@ -75,21 +86,31 @@ public class People : MonoBehaviour
                     }
                 }
                 break;
+            case MoveState.PlayerAtack:
+                Vector3 playerPosition = new Vector3(_player.transform.position.x, _player.transform.position.y, transform.position.z);
+                Vector3 distance = (this.transform.position - playerPosition).normalized;
+                transform.position += distance * _speed;
+                break;
         }
 
-        if(transform.position.x > _width + 2 || transform.position.x < -_width - 2 
-            || transform.position.y > _verticalWidth + 2 || transform.position.y < -_verticalWidth - 2) Destroy();
+        //画面外に出たら削除
+        if (transform.position.x > _width + 2 || transform.position.x < -_width - 2
+            || transform.position.y > _verticalWidth + 2 || transform.position.y < -_verticalWidth - 2)
+        { Destroy(); }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!IsActive) { return; }
+
+        if (name != "PeopleSanple(Clone)") { }
     }
 
     enum MoveState
     {
         AfterResporn,
-        RandamWalk
+        RandamWalk,
+        PlayerAtack
     }
 
     bool _isActrive = false;
