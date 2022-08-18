@@ -5,6 +5,7 @@ using ISDevTemplate.Manager;
 using UnityEngine.UI;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
+using ISDevTemplate.Scene;
 
 public class Result : MonoBehaviour
 {
@@ -36,10 +37,19 @@ public class Result : MonoBehaviour
     [Header("ポイントのテキストのフェード時間")]
     private float _pointTextFadeDuration = 0.5f;
 
+    [SerializeField]
+    [Header("タイトルに戻るボタン")]
+    private Button _backTitleButton;
+
+    [SerializeField]
+    private string _titleSceneName = "Title";
+
     private ResultData _resultData;
 
     private void Start()
     {
+        _backTitleButton.onClick.AddListener(OnBackTitleButton);
+
         _resultData = GameManager.Instance.ResultData;
         SetResultTexts();
     }
@@ -59,6 +69,11 @@ public class Result : MonoBehaviour
         {
             _earthDialogueText.DOText(_gameOverEarthDialogue, _earthDialogueTextFadeDuraiton);
         }
+    }
+
+    private void OnBackTitleButton()
+    {
+        SceneLoder.Instance.LoadScene(_titleSceneName);
     }
 }
 
