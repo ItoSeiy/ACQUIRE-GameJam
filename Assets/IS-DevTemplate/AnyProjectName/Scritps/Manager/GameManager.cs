@@ -50,7 +50,8 @@ namespace ISDevTemplate.Manager
             IsGameFinish = true;
             OnGameClear?.Invoke();
 
-            ResultData = new ResultData(PointManager.Instance.Point, ResultType.GameClear);
+            ResultData = new ResultData(PointManager.Instance.Point,
+                PointManager.Instance.PointToWin ,ResultType.GameClear);
 
             SceneLoder.Instance.LoadScene(_resultSceneName);
 
@@ -68,7 +69,8 @@ namespace ISDevTemplate.Manager
             IsGameFinish = true;
             OnGameOver?.Invoke();
 
-            ResultData = new ResultData(PointManager.Instance.Point, ResultType.GameOver);
+            ResultData = new ResultData(PointManager.Instance.Point,
+                PointManager.Instance.PointToWin, ResultType.GameOver);
 
             SceneLoder.Instance.LoadScene(_resultSceneName);
 

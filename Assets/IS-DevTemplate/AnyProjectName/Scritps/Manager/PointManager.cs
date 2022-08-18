@@ -11,6 +11,8 @@ public class PointManager : SingletonMonoBehaviour<PointManager>
 {
     public int Point => _point;
 
+    public int PointToWin => _pointToWin;
+
     public bool CanWin => _point >= _pointToWin;
 
     [SerializeField]
@@ -18,14 +20,23 @@ public class PointManager : SingletonMonoBehaviour<PointManager>
     private int _pointToWin;
 
     [SerializeField]
+    [Header("勝利するのに必要なポイント数のテキスト")]
+    private Text _pointToWinText;
+
+    [SerializeField]
     private Text _pointText;
 
     [SerializeField]
-    private float _textFadeDuration;
+    private float _textFadeDuration = 0.5f;
 
     private int _point;
 
     public event Action<int> OnPointChanged;
+
+    private void Start()
+    {
+        _pointToWinText.text = _pointToWin.ToString();
+    }
 
     public void AddPoint(int point)
     {
@@ -38,7 +49,7 @@ public class PointManager : SingletonMonoBehaviour<PointManager>
     {
         int lastPoint = _point;
         _pointText.DOCounter(lastPoint,
-            lastPoint + point, _textFadeDuration, true)
+            lastPoint + point, _textFadeDuration)
             .OnComplete(() => _pointText.text = $"{lastPoint + point}");
     }
 }
