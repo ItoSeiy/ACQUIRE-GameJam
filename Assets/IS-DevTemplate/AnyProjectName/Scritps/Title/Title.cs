@@ -36,9 +36,6 @@ public class Title : MonoBehaviour
     [Header("操作説明画像")]
     private Image _controlleExplanationImage;
 
-    [SerializeField]
-    private string _dataLoadScneName = "DataLoading";
-
     private void Start()
     {
         SetButtonEvents();   
@@ -54,18 +51,18 @@ public class Title : MonoBehaviour
 
         _creditButton.onClick.AddListener(OnCreditButton);
 
-        _controlleExplanationButton.onClick.AddListener(OnControlleExplanationButton);
+        //_controlleExplanationButton.onClick.AddListener(OnControlleExplanationButton);
     }
 
     private async void OnStartButton()
     {
         await SaveDataManager.Instance.ResetSaveDataAsync();   
-        SceneLoder.Instance.LoadScene(_dataLoadScneName);
+        SceneLoder.Instance.LoadScene(SaveDataManager.Instance.SaveData.SceneName);
     }
 
     private void OnContinueButton()
     {
-        SceneLoder.Instance.LoadScene(_dataLoadScneName);
+        SceneLoder.Instance.LoadScene(SaveDataManager.Instance.SaveData.SceneName);
     }
 
     private void OnEndButton()

@@ -51,7 +51,7 @@ namespace ISDevTemplate.Manager
             OnGameClear?.Invoke();
 
             ResultData = new ResultData(PointManager.Instance.Point,
-                PointManager.Instance.PointToWin ,ResultType.GameClear);
+                PointManager.Instance.PointToWin, ResultType.GameClear);
 
             SceneLoder.Instance.LoadScene(_resultSceneName);
 
@@ -91,7 +91,7 @@ namespace ISDevTemplate.Manager
             SceneLoder.Instance.OnLoadEnd += Init;
 
             // セーブデータの読み込み後の処理の登録
-            SaveDataManager.Instance.OnSaveDataLoded += OnSaveDataLoded;
+            //SaveDataManager.Instance.OnSaveDataLoded += OnSaveDataLoded;
 
             // ゲームクリア後に出るNextボタンの処理の登録
             //_onGameClearButton
@@ -108,13 +108,13 @@ namespace ISDevTemplate.Manager
             //    .Subscribe(_ => OnGameOverButton());
         }
 
-        /// <summary>
-        /// セーブデータの初回読み込み後にシーンを遷移する
-        /// </summary>
-        private void OnSaveDataLoded(SaveData saveData)
-        {
-            SceneLoder.Instance.LoadScene(saveData.SceneName);
-        }
+        ///// <summary>
+        ///// セーブデータの初回読み込み後にシーンを遷移する
+        ///// </summary>
+        //public void OnSaveDataLoded(SaveData saveData)
+        //{
+        //    SceneLoder.Instance.LoadScene(saveData.SceneName);
+        //}
 
         /// <summary>
         /// ゲームクリア後に表示されるボタンの処理
