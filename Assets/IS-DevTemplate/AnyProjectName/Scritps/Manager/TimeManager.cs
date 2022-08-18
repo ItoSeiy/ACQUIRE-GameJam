@@ -2,7 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ISDevTemplate.Manager;
+using System;
 
+/// <summary>
+/// タイムの管理
+/// 時間切れで勝利判定
+/// </summary>
 public class TimeManager : MonoBehaviour
 {
     public float Timer => _timer;

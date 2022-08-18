@@ -2,6 +2,9 @@ using ISDevTemplate;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// ポイントの管理
+/// </summary>
 public class PointManager : SingletonMonoBehaviour<PointManager>
 {
     public int Point => _point;
