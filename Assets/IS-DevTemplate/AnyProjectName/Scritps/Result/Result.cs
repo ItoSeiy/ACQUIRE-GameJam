@@ -10,20 +10,28 @@ using ISDevTemplate.Scene;
 public class Result : MonoBehaviour
 {
     [SerializeField]
-    [Header("勝利時の地球のセリフ")]
-    private string _gameClearEarthDialogue = "ありがとう";
+    [Header("ダークヒーローの勝利画像")]
+    private Image _darkHeroWinImage;
 
     [SerializeField]
-    [Header("敗北時の地球のセリフ")]
-    private string _gameOverEarthDialogue = "(´・ω・｀)";
+    [Header("ダークヒーロー敗北時の画像")]
+    private Image _darkHereLoseImage;
 
     [SerializeField]
-    [Header("地球のセリフのテキスト")]
-    private Text _earthDialogueText;
+    [Header("地球が救われた勝利画像")]
+    private Image _earthWinImage;
 
     [SerializeField]
-    [Header("地球のセリフのフェード時間")]
-    private float _earthDialogueTextFadeDuraiton = 0.8f;
+    [Header("地球が救われなかった画像")]
+    private Image _earthLoseImage;
+
+    [SerializeField]
+    [Header("ダークヒーロー, 地球の画面切り替え時間 (ミリ秒)")]
+    private int _imageChangeTime = 3500;
+
+    [SerializeField]
+    [Header("ダークヒーロー, 地球の画面切り替えのフェード時間 (ミリ秒)")]
+    private int _imageFadeDuration = 500;
 
     [SerializeField]
     [Header("ポイントのテキスト")]
@@ -48,6 +56,8 @@ public class Result : MonoBehaviour
 
     private void Start()
     {
+        _darkHereLoseImage.gameObject.SetActive(false);
+
         _backTitleButton.onClick.AddListener(OnBackTitleButton);
 
         _resultData = GameManager.Instance.ResultData;
@@ -56,19 +66,23 @@ public class Result : MonoBehaviour
 
     private async void SetResultTexts()
     {
+        if(_resultData.ResultType == ResultType.GameClear)
+        {
+            _darkHeroWinImage.gameObject.SetActive(true);
+            await UniTask.Delay(_imageChangeTime);
+            _earthWinImage.DOFade(1f, _imageFadeDuration);
+        }
+        else
+        {
+            _darkHereLoseImage.gameObject.SetActive(true);
+            await UniTask.Delay(_imageChangeTime);
+            _earthLoseImage.DOFade(1f, _imageFadeDuration);
+        }
+
         _pointToWinText.text = $"{_resultData.PointToWin}";
 
         await _pointText.DOCounter(0, _resultData.Point, _pointTextFadeDuration)
             .OnComplete(() => _pointText.text = $"{_resultData.Point}").AsyncWaitForCompletion();
-
-        if(_resultData.ResultType == ResultType.GameClear)
-        {
-            _earthDialogueText.DOText(_gameClearEarthDialogue, _earthDialogueTextFadeDuraiton);
-        }
-        else
-        {
-            _earthDialogueText.DOText(_gameOverEarthDialogue, _earthDialogueTextFadeDuraiton);
-        }
     }
 
     private void OnBackTitleButton()
