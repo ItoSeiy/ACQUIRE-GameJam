@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.ParticleSystem;
 
 public class People : MonoBehaviour
 {
 
     [SerializeField, Tooltip("移動速度")]
-    private float _speed = 2.0f;
+    private float _speed = 0.025f;
 
     [SerializeField, Tooltip("ゲーム画面に出てランダムに動き回るまでの最低時間")]
     float _nextMoveTime = 1.5f;
@@ -62,13 +63,14 @@ public class People : MonoBehaviour
                         if (this.name == "PeopleSanple(Clone)")//一般人はランダムに移動
                         {
                             _moveState = MoveState.RandamWalk;
-                            _randomVelo = new Vector3(Random.value, Random.value, 0);
+                            _randomVelo = new Vector3(Random.value, Random.value, 0).normalized;
                             _timer = 0;
                         }
-                        else if(this.name == "Yakuza(Clone)")//ヤクザ類は特攻
+                        else if (this.name == "Yakuza(Clone)")//ヤクザ類は特攻
                         {
                             _moveState = MoveState.PlayerAtack;
-                            _player = FindObjectOfType<Camera>().gameObject;
+                            _player = GameObject.Find("GameObject");//playerの代わり
+                            //_player = FindObjectOfType<Player>().gameObject; //実際に使うもの
                             _timer = 0;
                         }
                     }
@@ -81,15 +83,14 @@ public class People : MonoBehaviour
                 {
                     if (Random.Range(0, 2) < 1)
                     {
-                        _randomVelo = new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0);
+                        _randomVelo = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
                         _timer = 0;
                     }
                 }
                 break;
             case MoveState.PlayerAtack:
                 Vector3 playerPosition = new Vector3(_player.transform.position.x, _player.transform.position.y, transform.position.z);
-                Vector3 distance = (this.transform.position - playerPosition).normalized;
-                transform.position += distance * _speed;
+                transform.position = Vector3.MoveTowards(transform.position, playerPosition, _speed);
                 break;
         }
 

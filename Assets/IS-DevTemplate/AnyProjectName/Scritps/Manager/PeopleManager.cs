@@ -45,17 +45,19 @@ public class PeopleManager : MonoBehaviour
             if (Random.Range(0, 2) < 1) respawnWidth = -_width;
             else respawnWidth = _width;
 
-            int randomInt = Random.Range(0, _typeCount);
+            int randomInt = Random.Range(0, _typeCount + 2);
 
             switch (randomInt) 
             {
                 case 0:
+                case 1:
+                case 2:
                     GameObject people = _obp.UseObject("CommonPeople", new Vector3(respawnWidth, Random.Range(-_verticalWidth, _verticalWidth), 4.7f));
                     people.GetComponent<People>()._centerPoint = _centerPoint;
                     people.GetComponent<People>().Create();
                     break;
 
-                case 1:
+                case 3:
                     GameObject yakuza = _obp.UseObject("Yakuza", new Vector3(respawnWidth, Random.Range(-_verticalWidth, _verticalWidth), 4.7f));
                     yakuza.GetComponent<People>()._centerPoint = _centerPoint;
                     yakuza.GetComponent<People>().Create();
