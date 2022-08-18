@@ -2,7 +2,7 @@
 
 > 企画書 AnyURL
 
-> 仕様書 AnyURL
+> 仕様書 https://docs.google.com/spreadsheets/d/1SNUcYJb6PMTXjih2x4HXbCnMzAFU2eI1/edit#gid=679880142
 
 ## 注意点
 - productionブランチは各プロジェクトで作ること
