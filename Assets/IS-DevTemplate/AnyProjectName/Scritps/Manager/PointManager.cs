@@ -1,18 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+using ISDevTemplate;
 using UnityEngine;
+using System;
 
-public class PointManager : MonoBehaviour
+public class PointManager : SingletonMonoBehaviour<PointManager>
 {
-    private void Start()
+    public int Point => _point;
+
+    public bool CanWin => _point >= _pointToWin;
+
+    [SerializeField]
+    [Header("勝利するのに必要なポイント数")]
+    private int _pointToWin;
+
+    private int _point;
+
+    public event Action<int> OnPointChanged;
+
+    public void AddPoint(int point)
     {
-        
+        _point += point;
+        OnPointChanged?.Invoke(_point);
     }
-
-    private void SetEvent()
-    {
-        // TODO: プレイヤーのポイント獲得時のイベントを購読
-    }
-
-
 }
