@@ -328,6 +328,7 @@ MonoBehaviour:
   _imageChangeTime: 2000
   _imageFadeDuration: 0.5
   _pointText: {fileID: 1223854127}
+  _highScoreText: {fileID: 159047209}
   _pointTextFadeDuration: 0.5
   _backTitleButton: {fileID: 1831307568}
   _backButtonCanvas: {fileID: 1831307570}

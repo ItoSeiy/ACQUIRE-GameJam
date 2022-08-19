@@ -9,6 +9,7 @@ namespace ISDevTemplateEditor
     {
         string _sceneName;
         int _sceneIndex;
+        int _highScore;
 
         public override void OnInspectorGUI()
         {
@@ -22,9 +23,11 @@ namespace ISDevTemplateEditor
 
             _sceneIndex = EditorGUILayout.IntField("保存したいシーンのIndex", _sceneIndex);
 
+            _highScore = EditorGUILayout.IntField("最高得点", _highScore);
+
             if (GUILayout.Button("保存"))
             {
-                _ = manager.SaveAsync(new SaveData(_sceneName, _sceneIndex));
+                _ = manager.SaveAsync(new SaveData(_sceneName, _sceneIndex, _highScore));
             }
 
             EditorGUILayout.Space(10f);

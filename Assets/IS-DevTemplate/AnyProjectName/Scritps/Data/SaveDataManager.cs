@@ -31,6 +31,7 @@ namespace ISDevTemplate.Data
         {
             _ = LoadSaveData();
             GameManager.Instance.OnGameClear += OnGameClear;
+            GameManager.Instance.OnGameOver += OnGameOver;
         }
 
         public async UniTask SaveAsync(SaveData saveData)
@@ -50,13 +51,33 @@ namespace ISDevTemplate.Data
             try
             {
                 _sceneIndex++;
-                _saveData = new SaveData(_sceneNames[_sceneIndex], _sceneIndex);
+
+                if(PointManager.Instance.Point > _saveData.HighScore)
+                {
+                    _saveData.HighScore = PointManager.Instance.Point;
+                }
+                _saveData = new SaveData(_sceneNames[_sceneIndex], _sceneIndex, _saveData.HighScore);
             }
             catch (IndexOutOfRangeException)
             {
                 _sceneIndex = 0;
-                _saveData = new SaveData(_sceneNames[_sceneIndex], _sceneIndex);
+                if (PointManager.Instance.Point > _saveData.HighScore)
+                {
+                    _saveData.HighScore = PointManager.Instance.Point;
+                }
+                _saveData = new SaveData(_sceneNames[_sceneIndex], _sceneIndex, _saveData.HighScore);
             }
+
+            await SaveAsync(_saveData);
+        }
+
+        private async void OnGameOver()
+        {
+            if (PointManager.Instance.Point > _saveData.HighScore)
+            {
+                _saveData.HighScore = PointManager.Instance.Point;
+            }
+            _saveData = new SaveData(_sceneNames[_sceneIndex], _sceneIndex, _saveData.HighScore);
 
             await SaveAsync(_saveData);
         }

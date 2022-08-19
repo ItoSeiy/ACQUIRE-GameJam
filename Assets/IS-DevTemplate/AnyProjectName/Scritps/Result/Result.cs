@@ -7,6 +7,7 @@ using DG.Tweening;
 using Cysharp.Threading.Tasks;
 using ISDevTemplate.Scene;
 using ISDevTemplate;
+using ISDevTemplate.Data;
 
 public class Result : MonoBehaviour
 {
@@ -37,6 +38,9 @@ public class Result : MonoBehaviour
     [SerializeField]
     [Header("ポイントのテキスト")]
     private Text _pointText;
+
+    [SerializeField]
+    private Text _highScoreText;
 
     [SerializeField]
     [Header("ポイントのテキストのフェード時間")]
@@ -80,6 +84,9 @@ public class Result : MonoBehaviour
 
         await _pointText.DOCounter(0, _resultData.Point, _pointTextFadeDuration)
             .OnComplete(() => _pointText.text = $"{_resultData.Point}").AsyncWaitForCompletion();
+
+        await _highScoreText.DOCounter(0, SaveDataManager.Instance.SaveData.HighScore, _pointTextFadeDuration)
+            .OnComplete(() => _highScoreText.text = $"{SaveDataManager.Instance.SaveData.HighScore}").AsyncWaitForCompletion();
 
         _backButtonCanvas.Enable(_imageFadeDuration);
     }

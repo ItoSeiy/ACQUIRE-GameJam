@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using ISDevTemplate.Scene;
 using ISDevTemplate.Data;
+using DG.Tweening;
+using ISDevTemplate;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -25,8 +27,12 @@ public class Title : MonoBehaviour
     private Button _creditButton;
 
     [SerializeField]
-    [Header("クレジット画像")]
-    private Image _creditImage;
+    [Header("クレジットを閉じるボタン")]
+    private Button _creditCloseButton;
+
+    [SerializeField]
+    [Header("クレジットキャンバスグループ")]
+    private CanvasGroup _creditCanvasGroup;
 
     [SerializeField]
     [Header("操作説明ボタン")]
@@ -49,7 +55,9 @@ public class Title : MonoBehaviour
 
         _endButton.onClick.AddListener(OnEndButton);
 
-        //_creditButton.onClick.AddListener(OnCreditButton);
+        _creditButton.onClick.AddListener(OnCreditButton);
+
+        _creditCloseButton.onClick.AddListener(OnCreditCloseButton);
 
         //_controlleExplanationButton.onClick.AddListener(OnControlleExplanationButton);
     }
@@ -75,7 +83,12 @@ public class Title : MonoBehaviour
 
     private void OnCreditButton()
     {
-        _creditImage.gameObject.SetActive(true);
+        _creditCanvasGroup.Enable(0.5f);
+    }
+
+    private void OnCreditCloseButton()
+    {
+        _creditCanvasGroup.Disable(0.5f);
     }
 
     private void OnControlleExplanationButton()
