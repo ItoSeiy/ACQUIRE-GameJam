@@ -49,31 +49,31 @@ MonoBehaviour:
     soundPoolParams:
     - name: Suction
       audio: {fileID: -3717590659037883557, guid: f5994fc54531e4f469fc1101a57b5417, type: 3}
-      maxCount: 1
+      maxCount: 500
     - name: GunShot
       audio: {fileID: -3717590659037883557, guid: c458e561dfec82b43a9ab4fff8b5e6ca, type: 3}
-      maxCount: 1
+      maxCount: 500
     - name: Hit
       audio: {fileID: -3717590659037883557, guid: 831fd33f5c379e34c974a1682b54abf2, type: 3}
-      maxCount: 1
+      maxCount: 500
     - name: LandingBullet
       audio: {fileID: -3717590659037883557, guid: 88d02dddb59031c488cfe2df736e1b86, type: 3}
-      maxCount: 1
+      maxCount: 500
     - name: Clear
       audio: {fileID: -3717590659037883557, guid: 88a8b78d22e353947b260d4d229f0986, type: 3}
-      maxCount: 1
+      maxCount: 3
     - name: GameOver
       audio: {fileID: -3717590659037883557, guid: 01dc640c37d618546853f284cb96430b, type: 3}
-      maxCount: 1
+      maxCount: 3
     - name: ResultButton
       audio: {fileID: -3717590659037883557, guid: cd488fc1244b59a4eb9759eb0c900bf2, type: 3}
-      maxCount: 1
+      maxCount: 3
     - name: Timeup
       audio: {fileID: -3717590659037883557, guid: 97db1f23615cc40438bf0153d52b7bc3, type: 3}
-      maxCount: 1
+      maxCount: 3
     - name: TitleButton
       audio: {fileID: -3717590659037883557, guid: 7cf431ac1889b374a8ddddf884b0fe25, type: 3}
-      maxCount: 1
+      maxCount: 3
   _bgmAudioSource: {fileID: 1129527897261688760}
   _audioObjParent: {fileID: 1129527897392273330}
 --- !u!1 &1129527897261688762

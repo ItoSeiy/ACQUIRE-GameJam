@@ -8,6 +8,7 @@ using Cysharp.Threading.Tasks;
 using ISDevTemplate.Scene;
 using ISDevTemplate;
 using ISDevTemplate.Data;
+using ISDevTemplate.Sound;
 
 public class Result : MonoBehaviour
 {
@@ -71,12 +72,16 @@ public class Result : MonoBehaviour
     {
         if(_resultData.ResultType == ResultType.GameClear)
         {
+            SoundManager.Instance.UseSFX("Clear");
+
             _darkHeroWinImage.DOFade(1f, _imageFadeDuration);
             await UniTask.Delay(_imageChangeTime);
             _earthWinImage.DOFade(1f, _imageFadeDuration);
         }
         else
         {
+            SoundManager.Instance.UseSFX("GameOver");
+
             _darkHereLoseImage.DOFade(1f, _imageFadeDuration);
             await UniTask.Delay(_imageChangeTime);
             _earthLoseImage.DOFade(1f, _imageFadeDuration);
@@ -93,6 +98,7 @@ public class Result : MonoBehaviour
 
     private void OnBackTitleButton()
     {
+        SoundManager.Instance.UseSFX("ResultButton");
         SceneLoder.Instance.LoadScene(_titleSceneName);
     }
 }

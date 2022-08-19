@@ -4,6 +4,7 @@ using ISDevTemplate.Scene;
 using ISDevTemplate.Data;
 using DG.Tweening;
 using ISDevTemplate;
+using ISDevTemplate.Sound;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -64,6 +65,7 @@ public class Title : MonoBehaviour
 
     private void OnStartButton()
     {
+        SoundManager.Instance.UseSFX("TitleButton");
         SceneLoder.Instance.LoadScene(SaveDataManager.Instance.SaveData.SceneName);
     }
 
@@ -74,6 +76,7 @@ public class Title : MonoBehaviour
 
     private void OnEndButton()
     {
+        SoundManager.Instance.UseSFX("TitleButton");
         #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
         #else
@@ -83,11 +86,13 @@ public class Title : MonoBehaviour
 
     private void OnCreditButton()
     {
+        SoundManager.Instance.UseSFX("TitleButton");
         _creditCanvasGroup.Enable(0.5f);
     }
 
     private void OnCreditCloseButton()
     {
+        SoundManager.Instance.UseSFX("ResultButton");
         _creditCanvasGroup.Disable(0.5f);
     }
 
