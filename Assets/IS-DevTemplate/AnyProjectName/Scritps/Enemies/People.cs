@@ -176,14 +176,16 @@ public class People : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!_isActrive || name != "Yakuza(Clone)") { return; }
+        if (!_isActrive) { return; }
 
-        if (collision.gameObject.name == "Player")
+        if (name == "Yakuza(Clone)" && collision.gameObject.name == "Player")
         {
             _ani.Play("Attack");
             ISDevTemplate.Sound.SoundManager.Instance.UseSFX("Hit");
             collision.gameObject.GetComponent<Player>().Stan(_stanTime);
         }
+
+        if (name == "CommonPeople(Clone)") _timer = 9999;
     }
 
     enum MoveState
