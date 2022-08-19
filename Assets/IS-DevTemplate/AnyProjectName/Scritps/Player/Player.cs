@@ -60,8 +60,8 @@ public class Player : SingletonMonoBehaviour<Player>
         // TODO: プレイヤーを引き寄せる実装をする　引き寄せ終わったらデストロイ
         People people = other.GetComponent<People>(); 
         if (people)
-        { 
-            people.
+        {
+            people.Suction();
         }
        
     }
