@@ -29,6 +29,9 @@ public class People : MonoBehaviour
     [SerializeField, Tooltip("初めに保持するスケール")]
     private Vector3 _originScale;
 
+    [SerializeField, Tooltip("戦車の発射間隔")]
+    private float _shotInterbal = 5;
+
     /// <summary>スポーンの中心点</summary>
     public Transform _centerPoint = null;
 
@@ -41,11 +44,23 @@ public class People : MonoBehaviour
     /// <summary>ランダムな進行方向</summary>
     private Vector3 _randomVelo;
 
+    /// <summary>戦車が発射する弾 </summary>
+    private GameObject _bullet;
+
     /// <summary>DoTween用の変数</summary>
     private Tween tween;
 
     /// <summary> 時間計測用 </summary>
     private float _timer = 0;
+
+    private SpriteRenderer _sp = null;
+
+    private void Start()
+    {
+        if(this.name == "Tank(Clone)") { _bullet = Resources.Load("Bullet") as GameObject; }
+
+        _sp = GetComponent<SpriteRenderer>();
+    }
 
     void Update()
     {
@@ -61,31 +76,30 @@ public class People : MonoBehaviour
 
                 Vector3 playerPosition;
 
-                if (transform.position.x < _centerPoint.position.x) vero = new Vector3(_speed, 0, 0);
-                else vero = new Vector3(-_speed, 0, 0);
-
+                vero = transform.position.x < _centerPoint.position.x? new Vector3(_speed, 0, 0): new Vector3(-_speed, 0, 0);
+                _sp.flipX = vero.x > 0 ? true : false;
                 transform.position += vero;
 
                 if (_timer > _nextMoveTime)//一定時間後それぞれの行動に移行
                 {
-                    _moveState = MoveState.Suction;
-                    _player = FindObjectOfType<Player>().gameObject;
-                    return;
-
-                    if (Random.Range(0, 2) < 1)
+                    if (this.name == "PeopleSanple(Clone)")//一般人はランダムに移動
                     {
-                        if (this.name == "PeopleSanple(Clone)")//一般人はランダムに移動
-                        {
-                            _moveState = MoveState.RandamWalk;
-                            _randomVelo = new Vector3(Random.value, Random.value, 0).normalized;
-                            _timer = 0;
-                        }
-                        else if (this.name == "Yakuza(Clone)")//ヤクザ類は特攻
-                        {
-                            _moveState = MoveState.PlayerAtack;
-                            _player = FindObjectOfType<Player>().gameObject;
-                            _timer = 0;
-                        }
+                        _moveState = MoveState.RandamWalk;
+                        _randomVelo = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0).normalized;
+                        _sp.flipX = _randomVelo.x > 0 ? true : false;
+                        _timer = 0;
+                    }
+                    else if (this.name == "Yakuza(Clone)")//ヤクザ類は特攻
+                    {
+                        _moveState = MoveState.PlayerAtack;
+                        _player = FindObjectOfType<Player>().gameObject;
+                        _timer = 0;
+                    }
+                    else if (this.name == "Tank(Clone)")//戦車は動かずに一定間隔でプレイヤーを攻撃
+                    {
+                        _moveState = MoveState.Shot;
+                        _player = FindObjectOfType<Player>().gameObject;
+                        _timer = 2;
                     }
                 }
                 break;
@@ -96,15 +110,33 @@ public class People : MonoBehaviour
                 {
                     if (Random.Range(0, 2) < 1)
                     {
-                        _randomVelo = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+                        _randomVelo = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0).normalized;
+                        _sp.flipX = _randomVelo.x > 0 ? true : false;  
                         _timer = 0;
                     }
                 }
                 break;
-            case MoveState.PlayerAtack:
+
+            case MoveState.PlayerAtack://プレイヤーを追いかけて殴りに行く
                 playerPosition = new Vector3(_player.transform.position.x, _player.transform.position.y, transform.position.z);
                 transform.position = Vector3.MoveTowards(transform.position, playerPosition, _speed);
+                _sp.flipX = transform.position.x - playerPosition.x > 0 ? true : false;
+
+                if (Vector3.Distance(transform.position, playerPosition) < 0.1f) Destroy();
+
                 break;
+
+            //戦車は動かずに一定間隔で弾を発射する
+            case MoveState.Shot:
+                if (_timer > _shotInterbal) 
+                {
+                    Instantiate(_bullet , transform.position , Quaternion.identity);
+                    _timer = 0;
+                }
+                break;
+
+            //救引されたらプレイヤーに吸い寄せられるようにする
+            //このときスケールを小さくすることで吸われていくのを表現
             case MoveState.Suction:
                 playerPosition = new Vector3(_player.transform.position.x, _player.transform.position.y, transform.position.z);
                 transform.position = Vector3.MoveTowards(transform.position, playerPosition, _speed);
@@ -118,18 +150,12 @@ public class People : MonoBehaviour
         { Destroy(); }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (!IsActive) { return; }
-
-        if (name != "PeopleSanple(Clone)") { }
-    }
-
     enum MoveState
     {
         AfterResporn,
         RandamWalk,
         PlayerAtack,
+        Shot,
         Suction
     }
 
@@ -161,7 +187,13 @@ public class People : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    private void SuctionDestroy()
+    private void Suction()//救引時に呼ぶ関数
+    {
+        _moveState = MoveState.Suction;
+        _player = FindObjectOfType<Player>().gameObject;
+    }
+
+    private void SuctionDestroy()//救引後消す処理
     {
         PointManager.Instance.AddPoint(_score); Destroy();
     }

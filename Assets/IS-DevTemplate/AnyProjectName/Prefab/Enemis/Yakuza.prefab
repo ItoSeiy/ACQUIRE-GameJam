@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2106412471648443378}
   - component: {fileID: 2269095849204849190}
   - component: {fileID: 1654430239275571059}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Yakuza
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,6 +102,7 @@ MonoBehaviour:
   _verticalWidth: 2.8
   _score: 0
   _originScale: {x: 0.1, y: 0.1, z: 1}
+  _shotInterbal: 5
   _centerPoint: {fileID: 0}
 --- !u!70 &1654430239275571059
 CapsuleCollider2D:
@@ -116,6 +117,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.13244918, y: -0.08017093}
-  m_Size: {x: 3.7318585, y: 4.666738}
+  m_Offset: {x: 0.028703675, y: -0.080173686}
+  m_Size: {x: 3.524363, y: 4.6667376}
   m_Direction: 0
