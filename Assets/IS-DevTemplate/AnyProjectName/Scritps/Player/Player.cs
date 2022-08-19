@@ -41,7 +41,7 @@ public class Player : SingletonMonoBehaviour<Player>
 
     }
 
-    async void Stan(int stanTime)
+    public async void Stan(int stanTime)
     {
         await Task.Delay(stanTime * 1000);
     }
