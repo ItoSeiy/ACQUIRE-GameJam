@@ -212,15 +212,15 @@ PrefabInstance:
       objectReference: {fileID: 77129316521954765, guid: db10c6f35efab66429acafd05ea967d3, type: 3}
     - target: {fileID: 5393194010268487411, guid: e389ccba6caa60343a1f75d569c4f306, type: 3}
       propertyPath: _objParam._params.Array.data[0].maxCount
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5393194010268487411, guid: e389ccba6caa60343a1f75d569c4f306, type: 3}
       propertyPath: _objParam._params.Array.data[1].maxCount
-      value: 1
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5393194010268487411, guid: e389ccba6caa60343a1f75d569c4f306, type: 3}
       propertyPath: _objParam._params.Array.data[2].maxCount
-      value: 1
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e389ccba6caa60343a1f75d569c4f306, type: 3}
@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 1632277803}
   - component: {fileID: 1632277805}
   - component: {fileID: 1632277806}
+  - component: {fileID: 1632277807}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -510,6 +511,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.004017636}
   serializedVersion: 2
   m_Radius: 0.09598236
+--- !u!50 &1632277807
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632277802}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &1697386374
 GameObject:
   m_ObjectHideFlags: 0

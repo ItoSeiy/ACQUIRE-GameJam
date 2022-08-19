@@ -202,7 +202,8 @@ public class People : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    private void Suction()//救引時に呼ぶ関数
+    /// <summary>救引時に呼ぶ関数</summary>
+    public void Suction()
     {
         _moveState = MoveState.Suction;
         _player = FindObjectOfType<Player>().gameObject;
