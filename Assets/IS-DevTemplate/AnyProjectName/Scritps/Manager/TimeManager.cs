@@ -17,6 +17,9 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private Text _timerText;
 
+    [SerializeField]
+    Image _timeUpImage;
+
     private float _timer;
 
     private void Start()
@@ -43,6 +46,7 @@ public class TimeManager : MonoBehaviour
         if (_timer <= 0f) return;
 
         UpdateText(0);
+        _timeUpImage.gameObject.SetActive(true);
 
         if(PointManager.Instance.CanWin)
         {
