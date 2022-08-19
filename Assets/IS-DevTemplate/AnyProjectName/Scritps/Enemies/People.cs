@@ -53,6 +53,9 @@ public class People : MonoBehaviour
     /// <summary>戦車が発射する弾 </summary>
     private GameObject _bullet;
 
+    /// <summary>戦車が発射する際の爆発 </summary>
+    private GameObject _shotBomb;
+
     /// <summary>DoTween用の変数</summary>
     private Tween tween;
 
@@ -61,11 +64,19 @@ public class People : MonoBehaviour
 
     private SpriteRenderer _sp = null;
 
+    private Animator _ani = null;
+
     private void Start()
     {
-        if (this.name == "Tank(Clone)") { _bullet = Resources.Load("Bullet") as GameObject; }
+        if (this.name == "Tank(Clone)") 
+        { 
+            _bullet = Resources.Load("Bullet") as GameObject;
+            _shotBomb = Resources.Load("ShotBomb") as GameObject;
+        }
 
         _sp = GetComponent<SpriteRenderer>();
+
+        _ani = GetComponent<Animator>();
     }
 
     void Update()
@@ -133,8 +144,16 @@ public class People : MonoBehaviour
             case MoveState.Shot:
                 if (_timer > _shotInterbal)
                 {
-                    if (!_sp.flipX) { Instantiate(_bullet, _launchrPoint[0].position, Quaternion.identity); }
-                    else {Instantiate(_bullet, _launchrPoint[1].position, Quaternion.identity);}
+                    if (!_sp.flipX)
+                    {
+                        Instantiate(_bullet, _launchrPoint[0].position, Quaternion.identity);
+                        Instantiate(_shotBomb, _launchrPoint[0].position, Quaternion.identity);
+                    }
+                    else
+                    {
+                        Instantiate(_bullet, _launchrPoint[1].position, Quaternion.identity);
+                        Instantiate(_shotBomb, _launchrPoint[1].position, Quaternion.identity);
+                    }
                     ISDevTemplate.Sound.SoundManager.Instance.UseSFX("GunShot");
                     _timer = 0;
                 }
@@ -161,9 +180,9 @@ public class People : MonoBehaviour
 
         if (collision.gameObject.name == "Player")
         {
+            _ani.Play("Attack");
             ISDevTemplate.Sound.SoundManager.Instance.UseSFX("Hit");
             collision.gameObject.GetComponent<Player>().Stan(_stanTime);
-            Destroy();
         }
     }
 
@@ -191,6 +210,7 @@ public class People : MonoBehaviour
 
     public void Create()//生成時
     {
+        if (_ani != null && name == "Yakuza(Clone)") { _ani.Play("Idle"); }
         _timer = 0.0f;
         transform.localScale = _originScale;
         _isActrive = true;

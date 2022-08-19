@@ -21,21 +21,29 @@ public class Bullet : MonoBehaviour
 
     private SpriteRenderer _sp;
 
+    private Animator _ani;
+
     private void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        _ani = GetComponent<Animator>();
 
-        _sp = GetComponent<SpriteRenderer>();
+        if (name == "Bullet(Clone)") 
+        {
+            _rb = GetComponent<Rigidbody2D>();
 
-        _player = FindObjectOfType<Player>().gameObject;
+            _sp = GetComponent<SpriteRenderer>();
 
-        _rot = Vector3.Scale(_player.transform.position - transform.position
-                                                                    , new Vector3(1, 1, 0)).normalized;
-        this.transform.rotation = Quaternion.FromToRotation(-Vector3.right , _player.transform.position - transform.position);
+            _player = FindObjectOfType<Player>().gameObject;
 
-        _sp.flipY = _rot.x > 0 ? true : false; 
+            _rot = Vector3.Scale(_player.transform.position - transform.position
+                                                                        , new Vector3(1, 1, 0)).normalized;
+            this.transform.rotation = Quaternion.FromToRotation(-Vector3.right, _player.transform.position - transform.position);
 
-        _rb.velocity = _rot * _speed;
+            _sp.flipY = _rot.x > 0 ? true : false;
+
+            _rb.velocity = _rot * _speed;
+        }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -44,7 +52,12 @@ public class Bullet : MonoBehaviour
         {
             ISDevTemplate.Sound.SoundManager.Instance.UseSFX("LandingBullet");
             collision.gameObject.GetComponent<Player>().Stan(_stanTime);
-            Destroy(gameObject);
+            _ani.Play("LandingBullet");
         } 
+    }
+
+    public void Destroy()
+    {
+        Destroy(this.gameObject);
     }
 }

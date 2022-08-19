@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LandingBullet
+  m_Name: Yakuza_Idle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,15 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: b77e2d33d2886d24ca0a890af99709da, type: 3}
-    - time: 0.16666667
-      value: {fileID: 21300000, guid: f085924acfe97f44797c1430902c9ea1, type: 3}
-    - time: 0.33333334
-      value: {fileID: 21300000, guid: 649c25067c40a4046b657f8c4e88cc3c, type: 3}
-    - time: 0.5
-      value: {fileID: 21300000, guid: 31eb1ecf09c67e347982b1f78fcb8359, type: 3}
-    - time: 0.6666667
-      value: {fileID: 21300000, guid: 95c724ee2a75aa546b1424f1e1322245, type: 3}
+      value: {fileID: 21300000, guid: 0a2ee38c6baeb3642ad5bb20bd381c20, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -48,17 +40,13 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: b77e2d33d2886d24ca0a890af99709da, type: 3}
-    - {fileID: 21300000, guid: f085924acfe97f44797c1430902c9ea1, type: 3}
-    - {fileID: 21300000, guid: 649c25067c40a4046b657f8c4e88cc3c, type: 3}
-    - {fileID: 21300000, guid: 31eb1ecf09c67e347982b1f78fcb8359, type: 3}
-    - {fileID: 21300000, guid: 95c724ee2a75aa546b1424f1e1322245, type: 3}
+    - {fileID: 21300000, guid: 0a2ee38c6baeb3642ad5bb20bd381c20, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.68333334
+    m_StopTime: 0.016666668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -77,11 +65,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0.53333336
-    functionName: Destroy
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []
