@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -3717590659037883557}
   - component: {fileID: -7924372044709004356}
   m_Layer: 0
-  m_Name: Suction
+  m_Name: SE_Clear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,9 +42,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 27cd0b01227a1344e9e89ba1f51f41e2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 372da3de0bb1b2d4e9e61f70da9e5e3e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.139
   m_Pitch: 1
   Loop: 0
   Mute: 0

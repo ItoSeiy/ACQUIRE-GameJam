@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -3717590659037883557}
   - component: {fileID: -7924372044709004356}
   m_Layer: 0
-  m_Name: Gunshot
+  m_Name: SE_GunShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,9 +42,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 81bcf0962df7ec445a4b098b3a03907c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8db614263ffd1c1409586f02a64d54dc, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.139
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -140,4 +140,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e965fa2a6913042bc0a2205310a2ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _disableTime: 2000
+  _disableTime: 1000

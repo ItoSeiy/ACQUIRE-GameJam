@@ -42,6 +42,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.name == "Player") 
         {
+            ISDevTemplate.Sound.SoundManager.Instance.UseSFX("LandingBullet");
             collision.gameObject.GetComponent<Player>().Stan(_stanTime);
             Destroy(gameObject);
         } 

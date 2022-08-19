@@ -52,15 +52,15 @@ public class PeopleManager : MonoBehaviour
                     people.GetComponent<People>().Create();
                     break;
 
-                case 4:
-                    GameObject yakuza = ISDevTemplate.Pool.ObjectPool.Instance.UseObject("Yakuza", new Vector3(respawnWidth, Random.Range(-_verticalWidth, _verticalWidth), 4.7f));
-                    yakuza.GetComponent<People>()._centerPoint = _centerPoint;
-                    yakuza.GetComponent<People>().Create();
+                //case 4:
+                //    GameObject yakuza = ISDevTemplate.Pool.ObjectPool.Instance.UseObject("Yakuza", new Vector3(respawnWidth, Random.Range(-_verticalWidth, _verticalWidth), 4.7f));
+                //    yakuza.GetComponent<People>()._centerPoint = _centerPoint;
+                //    yakuza.GetComponent<People>().Create();
 
-                    GameObject Tank = ISDevTemplate.Pool.ObjectPool.Instance.UseObject("Tank", new Vector3(respawnWidth, Random.Range(_centerPoint.position.y - _verticalWidth, _centerPoint.position.y + _verticalWidth), 4.7f));
-                    Tank.GetComponent<People>()._centerPoint = _centerPoint;
-                    Tank.GetComponent<People>().Create();
-                    break;
+                //    GameObject Tank = ISDevTemplate.Pool.ObjectPool.Instance.UseObject("Tank", new Vector3(respawnWidth, Random.Range(_centerPoint.position.y - _verticalWidth, _centerPoint.position.y + _verticalWidth), 4.7f));
+                //    Tank.GetComponent<People>()._centerPoint = _centerPoint;
+                //    Tank.GetComponent<People>().Create();
+                //    break;
             }
 
 
