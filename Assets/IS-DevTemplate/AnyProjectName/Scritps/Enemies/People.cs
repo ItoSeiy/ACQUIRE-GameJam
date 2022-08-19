@@ -116,7 +116,7 @@ public class People : MonoBehaviour
                     {
                         _moveState = MoveState.Shot;
                         _player = FindObjectOfType<Player>().gameObject;
-                        _timer = 7;
+                        _timer = 10;
                     }
                 }
                 break;

@@ -125,14 +125,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6471fbb971998bc43986759a2deab675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.001
+  _speed: 0.005
   _nextMoveTime: 1.5
   _width: 9.6
   _verticalWidth: 3.11
   _score: 100
   _stanTime: 1
   _originScale: {x: 0.5, y: 0.5, z: 0.5}
-  _shotInterbal: 10
+  _shotInterbal: 13
   _launchrPoint:
   - {fileID: 7004006393205297289}
   - {fileID: 2006574846313911559}

@@ -55,7 +55,7 @@ public class PointManager : SingletonMonoBehaviour<PointManager>
     {
         int lastPoint = _point;
         _pointText.DOCounter(lastPoint,
-            lastPoint + point, _textFadeDuration)
+            lastPoint + point, _textFadeDuration, false)
             .OnComplete(() => _pointText.text = $"{lastPoint + point}");
     }
 }

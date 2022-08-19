@@ -39,15 +39,15 @@ public class PeopleManager : MonoBehaviour
             if (Random.Range(0, 2) < 1) respawnWidth = -_width;
             else respawnWidth = _width;
 
-            int randomInt = Random.Range(0, 101);
+            float randomInt = Random.Range(0f, 101f);
 
-            if (randomInt < 80)
+            if (randomInt < 99)
             {
                 GameObject people = ISDevTemplate.Pool.ObjectPool.Instance.UseObject("CommonPeople", new Vector3(respawnWidth, Random.Range(-_verticalWidth, _verticalWidth), 4.7f));
                 people.GetComponent<People>()._centerPoint = _centerPoint;
                 people.GetComponent<People>().Create();
             }
-            else if (80 < randomInt && randomInt < 95)
+            else if (99 < randomInt && randomInt < 99.5)
             {
                 GameObject yakuza = ISDevTemplate.Pool.ObjectPool.Instance.UseObject("Yakuza", new Vector3(respawnWidth, Random.Range(-_verticalWidth, _verticalWidth), 4.7f));
                 yakuza.GetComponent<People>()._centerPoint = _centerPoint;
