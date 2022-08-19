@@ -135,6 +135,7 @@ public class People : MonoBehaviour
                 {
                     if (!_sp.flipX) { Instantiate(_bullet, _launchrPoint[0].position, Quaternion.identity); }
                     else {Instantiate(_bullet, _launchrPoint[1].position, Quaternion.identity);}
+                    ISDevTemplate.Sound.SoundManager.Instance.UseSFX("GunShot");
                     _timer = 0;
                 }
                 break;
@@ -144,7 +145,7 @@ public class People : MonoBehaviour
             case MoveState.Suction:
                 playerPosition = new Vector3(_player.transform.position.x, _player.transform.position.y, transform.position.z);
                 transform.position = Vector3.MoveTowards(transform.position, playerPosition, _speed);
-                tween = transform.DOScale(Vector3.zero, 2f).SetAutoKill(false).OnComplete(SuctionDestroy);//目標のスケール値と演出時間
+                tween = transform.DOScale(Vector3.zero, 0.1f).SetAutoKill(false).OnComplete(SuctionDestroy);//目標のスケール値と演出時間
                 break;
         }
 
@@ -160,6 +161,7 @@ public class People : MonoBehaviour
 
         if (collision.gameObject.name == "Player")
         {
+            ISDevTemplate.Sound.SoundManager.Instance.UseSFX("Hit");
             collision.gameObject.GetComponent<Player>().Stan(_stanTime);
             Destroy();
         }
@@ -205,6 +207,7 @@ public class People : MonoBehaviour
     /// <summary>救引時に呼ぶ関数</summary>
     public void Suction()
     {
+        ISDevTemplate.Sound.SoundManager.Instance.UseSFX("Suction");
         _moveState = MoveState.Suction;
         _player = FindObjectOfType<Player>().gameObject;
     }

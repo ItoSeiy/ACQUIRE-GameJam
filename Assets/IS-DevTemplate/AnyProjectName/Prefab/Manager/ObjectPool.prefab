@@ -44,5 +44,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objParam:
-    _params: []
+    _params:
+    - name: CommonPeople
+      prefab: {fileID: 765989177517318583, guid: 7c3a473a1e17e71428e0953e5755b9b5, type: 3}
+      maxCount: 100
+    - name: Yakuza
+      prefab: {fileID: 765989177517318583, guid: 12039786a35264b40993f3eb329fd38a, type: 3}
+      maxCount: 50
+    - name: Tank
+      prefab: {fileID: 77129316521954765, guid: db10c6f35efab66429acafd05ea967d3, type: 3}
+      maxCount: 50
   _poolPrefabParent: {fileID: 995492886181658234}
