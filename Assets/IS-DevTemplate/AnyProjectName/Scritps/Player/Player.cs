@@ -9,10 +9,11 @@ public class Player : SingletonMonoBehaviour<Player>
     private bool CanMove = true;
 
     [SerializeField]
-    public float _speedx = 0.1f;
-    public float _speedy = 0.05f;
+    public float _speedx = 0.1f;  // 横移動速度
+    public float _speedy = 0.05f; // 縦移動速度
 
-   
+    [SerializeField]
+    Animator _animator;
 
     private void Start()
     {
@@ -23,7 +24,7 @@ public class Player : SingletonMonoBehaviour<Player>
     {
         if (!CanMove) return;
 
-        Vector3 reversal = Vector3
+        Vector3 direction = transform.localScale;
 
         // TODO: キー入力で移動　進行方向で画像反転
         if (Input.GetKey(KeyCode.W))
@@ -38,21 +39,27 @@ public class Player : SingletonMonoBehaviour<Player>
         {
             transform.Translate(_speedx, 0f, 0f);
             //this.GetComponent<SpriteRenderer>().flipX = true;
+            if(direction.x < 0)
+            direction.x = -transform.localScale.x; 
         }
         if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(-_speedx, 0f, 0f);
             //this.GetComponent<SpriteRenderer>().flipX = false;
-            transform.localScale.x = -1f;
-        } 
+            if (direction.x > 0)
+                direction.x = -transform.localScale.x;
+        }
+
+        transform.localScale = direction; 
 
     }
 
     public async void Stan(int stanTime)
     {
         CanMove = false;
-
+        _animator.Play("Stan");
         await Task.Delay(stanTime * 1000);
+        _animator.Play("Idle");
         CanMove = true;
     }
     private void OnTriggerEnter2D(Collider2D other)    
