@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
 using ISDevTemplate.Scene;
+using ISDevTemplate;
 
 public class Result : MonoBehaviour
 {
@@ -30,16 +31,12 @@ public class Result : MonoBehaviour
     private int _imageChangeTime = 3500;
 
     [SerializeField]
-    [Header("ダークヒーロー, 地球の画面切り替えのフェード時間 (ミリ秒)")]
-    private int _imageFadeDuration = 500;
+    [Header("ダークヒーロー, 地球の画面切り替えのフェード時間")]
+    private float _imageFadeDuration = 0.5f;
 
     [SerializeField]
     [Header("ポイントのテキスト")]
     private Text _pointText;
-
-    [SerializeField]
-    [Header("勝利するのに必要なポイント数のテキスト")]
-    private Text _pointToWinText;
 
     [SerializeField]
     [Header("ポイントのテキストのフェード時間")]
@@ -50,14 +47,16 @@ public class Result : MonoBehaviour
     private Button _backTitleButton;
 
     [SerializeField]
+    [Header("タイトルに戻るボタンのキャンバスグループ")]
+    private CanvasGroup _backButtonCanvas;
+
+    [SerializeField]
     private string _titleSceneName = "Title";
 
     private ResultData _resultData;
 
     private void Start()
     {
-        _darkHereLoseImage.gameObject.SetActive(false);
-
         _backTitleButton.onClick.AddListener(OnBackTitleButton);
 
         _resultData = GameManager.Instance.ResultData;
@@ -79,10 +78,10 @@ public class Result : MonoBehaviour
             _earthLoseImage.DOFade(1f, _imageFadeDuration);
         }
 
-        _pointToWinText.text = $"{_resultData.PointToWin}";
-
         await _pointText.DOCounter(0, _resultData.Point, _pointTextFadeDuration)
             .OnComplete(() => _pointText.text = $"{_resultData.Point}").AsyncWaitForCompletion();
+
+        _backButtonCanvas.Enable(_imageFadeDuration);
     }
 
     private void OnBackTitleButton()

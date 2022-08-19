@@ -2,6 +2,7 @@ using System;
 using ISDevTemplate.Data;
 using ISDevTemplate.Scene;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 namespace ISDevTemplate.Manager
 {
@@ -13,6 +14,9 @@ namespace ISDevTemplate.Manager
 
         [SerializeField]
         private string _resultSceneName = "Result";
+
+        [SerializeField]
+        private int _sceneChangeTime = 1500;
 
         //[SerializeField]
         //private CanvasGroup _gameClearCanvas;
@@ -45,7 +49,7 @@ namespace ISDevTemplate.Manager
         /// TimeManagerからの呼び出し
         /// </summary>
         [ContextMenu("GameClear")]
-        public void GameClear()
+        public async void GameClear()
         {
             IsGameFinish = true;
             OnGameClear?.Invoke();
@@ -53,9 +57,11 @@ namespace ISDevTemplate.Manager
             ResultData = new ResultData(PointManager.Instance.Point,
                 PointManager.Instance.PointToWin, ResultType.GameClear);
 
-            SceneLoder.Instance.LoadScene(_resultSceneName);
-
             print("GameClear");
+
+            await UniTask.Delay(_sceneChangeTime);
+
+            SceneLoder.Instance.LoadScene(_resultSceneName);
         }
 
         /// <summary>
@@ -64,7 +70,7 @@ namespace ISDevTemplate.Manager
         /// TimeManagerからの呼び出し
         /// </summary>
         [ContextMenu("GameOver")]
-        public void GameOver()
+        public async void GameOver()
         {
             IsGameFinish = true;
             OnGameOver?.Invoke();
@@ -72,9 +78,11 @@ namespace ISDevTemplate.Manager
             ResultData = new ResultData(PointManager.Instance.Point,
                 PointManager.Instance.PointToWin, ResultType.GameOver);
 
-            SceneLoder.Instance.LoadScene(_resultSceneName);
-
             print("GameOver");
+
+            await UniTask.Delay(_sceneChangeTime);
+
+            SceneLoder.Instance.LoadScene(_resultSceneName);
         }
 
         private void Init()

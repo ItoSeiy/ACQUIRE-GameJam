@@ -43,7 +43,7 @@ public class TimeManager : MonoBehaviour
 
     private void CheckTimeOver()
     {
-        if (_timer <= 0f) return;
+        if (_timer >= 0f) return;
 
         UpdateText(0);
         _timeUpImage.gameObject.SetActive(true);
