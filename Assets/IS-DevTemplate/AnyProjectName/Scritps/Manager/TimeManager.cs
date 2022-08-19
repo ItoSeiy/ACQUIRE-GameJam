@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
+using ISDevTemplate.Sound;
 
 /// <summary>
 /// タイムの管理
@@ -54,6 +55,8 @@ public class TimeManager : MonoBehaviour
         await _timeUpImage.DOFade(1f, _fadeTime).AsyncWaitForCompletion();
 
         if (GameManager.Instance.IsGameFinish) return;
+
+        SoundManager.Instance.UseSFX("Timeup");
 
         if (PointManager.Instance.CanWin)
         {
