@@ -288,11 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e020b9b19fdd22a4c8ca54f84e8f517f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameClearCanvas: {fileID: 9173447476265599955}
-  _onGameClearButton: {fileID: 2658258331395246801}
-  _gameOverCanvas: {fileID: 3842253105433932922}
-  _onGameOverButton: {fileID: 8561946025152068202}
-  _fadeDuration: 0.5
+  _resultSceneName: Result
 --- !u!1 &5677578927266861921
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,7 +669,6 @@ MonoBehaviour:
   _sceneNames:
   - Stage01
   - Stage02
-  - Stage03
 --- !u!1 &5677578929078346050
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,9 +754,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5677578929078346050}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &6468493219196626192
 GameObject:

@@ -12,9 +12,9 @@ public class Title : MonoBehaviour
     [Header("初めから ボタン")]
     private Button _startButton;
 
-    [SerializeField]
-    [Header("続きから ボタン")]
-    private Button _continueButton;
+    //[SerializeField]
+    //[Header("続きから ボタン")]
+    //private Button _continueButton;
 
     [SerializeField]
     [Header("終了ボタン")]
@@ -36,9 +36,6 @@ public class Title : MonoBehaviour
     [Header("操作説明画像")]
     private Image _controlleExplanationImage;
 
-    [SerializeField]
-    private string _dataLoadScneName = "DataLoading";
-
     private void Start()
     {
         SetButtonEvents();   
@@ -48,24 +45,23 @@ public class Title : MonoBehaviour
     {
         _startButton.onClick.AddListener(OnStartButton);
 
-        _continueButton.onClick.AddListener(OnContinueButton);
+        //_continueButton.onClick.AddListener(OnContinueButton);
 
         _endButton.onClick.AddListener(OnEndButton);
 
-        _creditButton.onClick.AddListener(OnCreditButton);
+        //_creditButton.onClick.AddListener(OnCreditButton);
 
-        _controlleExplanationButton.onClick.AddListener(OnControlleExplanationButton);
+        //_controlleExplanationButton.onClick.AddListener(OnControlleExplanationButton);
     }
 
-    private async void OnStartButton()
+    private void OnStartButton()
     {
-        await SaveDataManager.Instance.ResetSaveDataAsync();   
-        SceneLoder.Instance.LoadScene(_dataLoadScneName);
+        SceneLoder.Instance.LoadScene(SaveDataManager.Instance.SaveData.SceneName);
     }
 
     private void OnContinueButton()
     {
-        SceneLoder.Instance.LoadScene(_dataLoadScneName);
+        SceneLoder.Instance.LoadScene(SaveDataManager.Instance.SaveData.SceneName);
     }
 
     private void OnEndButton()

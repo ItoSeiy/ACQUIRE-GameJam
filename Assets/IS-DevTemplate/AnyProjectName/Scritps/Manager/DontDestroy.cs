@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ISDevTemplate.Manager
 {
-    public class DontDestroy : MonoBehaviour
+    public class DontDestroy : SingletonMonoBehaviour<DontDestroy>
     {
         private void Start()
         {

@@ -2,6 +2,7 @@ using System;
 using ISDevTemplate.Data;
 using ISDevTemplate.Scene;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 namespace ISDevTemplate.Manager
 {
@@ -13,6 +14,9 @@ namespace ISDevTemplate.Manager
 
         [SerializeField]
         private string _resultSceneName = "Result";
+
+        [SerializeField]
+        private int _sceneChangeTime = 1500;
 
         //[SerializeField]
         //private CanvasGroup _gameClearCanvas;
@@ -45,17 +49,19 @@ namespace ISDevTemplate.Manager
         /// TimeManagerからの呼び出し
         /// </summary>
         [ContextMenu("GameClear")]
-        public void GameClear()
+        public async void GameClear()
         {
             IsGameFinish = true;
             OnGameClear?.Invoke();
 
             ResultData = new ResultData(PointManager.Instance.Point,
-                PointManager.Instance.PointToWin ,ResultType.GameClear);
-
-            SceneLoder.Instance.LoadScene(_resultSceneName);
+                PointManager.Instance.PointToWin, ResultType.GameClear);
 
             print("GameClear");
+
+            await UniTask.Delay(_sceneChangeTime);
+
+            SceneLoder.Instance.LoadScene(_resultSceneName);
         }
 
         /// <summary>
@@ -64,7 +70,7 @@ namespace ISDevTemplate.Manager
         /// TimeManagerからの呼び出し
         /// </summary>
         [ContextMenu("GameOver")]
-        public void GameOver()
+        public async void GameOver()
         {
             IsGameFinish = true;
             OnGameOver?.Invoke();
@@ -72,9 +78,11 @@ namespace ISDevTemplate.Manager
             ResultData = new ResultData(PointManager.Instance.Point,
                 PointManager.Instance.PointToWin, ResultType.GameOver);
 
-            SceneLoder.Instance.LoadScene(_resultSceneName);
-
             print("GameOver");
+
+            await UniTask.Delay(_sceneChangeTime);
+
+            SceneLoder.Instance.LoadScene(_resultSceneName);
         }
 
         private void Init()
@@ -91,7 +99,7 @@ namespace ISDevTemplate.Manager
             SceneLoder.Instance.OnLoadEnd += Init;
 
             // セーブデータの読み込み後の処理の登録
-            SaveDataManager.Instance.OnSaveDataLoded += OnSaveDataLoded;
+            //SaveDataManager.Instance.OnSaveDataLoded += OnSaveDataLoded;
 
             // ゲームクリア後に出るNextボタンの処理の登録
             //_onGameClearButton
@@ -108,13 +116,13 @@ namespace ISDevTemplate.Manager
             //    .Subscribe(_ => OnGameOverButton());
         }
 
-        /// <summary>
-        /// セーブデータの初回読み込み後にシーンを遷移する
-        /// </summary>
-        private void OnSaveDataLoded(SaveData saveData)
-        {
-            SceneLoder.Instance.LoadScene(saveData.SceneName);
-        }
+        ///// <summary>
+        ///// セーブデータの初回読み込み後にシーンを遷移する
+        ///// </summary>
+        //public void OnSaveDataLoded(SaveData saveData)
+        //{
+        //    SceneLoder.Instance.LoadScene(saveData.SceneName);
+        //}
 
         /// <summary>
         /// ゲームクリア後に表示されるボタンの処理
