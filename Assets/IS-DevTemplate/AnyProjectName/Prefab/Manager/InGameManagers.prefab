@@ -629,7 +629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533a138e76b8c5345ac24ec6f02f4e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _limitTime: 10
+  _limitTime: 60
   _timerText: {fileID: 101501504774058092}
   _timeUpImage: {fileID: 1586447089163458884}
   _fadeTime: 0.5
