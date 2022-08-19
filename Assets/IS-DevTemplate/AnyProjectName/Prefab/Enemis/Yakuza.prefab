@@ -101,7 +101,7 @@ MonoBehaviour:
   _width: 5
   _verticalWidth: 2.8
   _score: 0
-  _stanTime: 1
+  _stanTime: 6
   _originScale: {x: 0.1, y: 0.1, z: 1}
   _shotInterbal: 5
   _launchrPoint: []
