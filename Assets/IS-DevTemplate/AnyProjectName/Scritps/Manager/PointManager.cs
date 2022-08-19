@@ -3,6 +3,7 @@ using ISDevTemplate;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using ISDevTemplate.Data;
 
 /// <summary>
 /// ポイントの管理
@@ -29,6 +30,9 @@ public class PointManager : SingletonMonoBehaviour<PointManager>
     [SerializeField]
     private float _textFadeDuration = 0.5f;
 
+    [SerializeField]
+    private Text _highScoreText;
+
     private int _point;
 
     public event Action<int> OnPointChanged;
@@ -36,6 +40,8 @@ public class PointManager : SingletonMonoBehaviour<PointManager>
     private void Start()
     {
         _pointToWinText.text = _pointToWin.ToString();
+
+        _highScoreText.text = SaveDataManager.Instance.SaveData.HighScore.ToString();
     }
 
     public void AddPoint(int point)

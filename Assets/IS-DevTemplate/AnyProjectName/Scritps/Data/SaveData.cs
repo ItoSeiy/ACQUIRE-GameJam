@@ -8,10 +8,13 @@ namespace ISDevTemplate.Data
         /// <summary>このシーンが何番目であるか</summary>
         public int SceneIndex;
 
-        public SaveData(string sceneName, int sceneIndex)
+        public int HighScore;
+
+        public SaveData(string sceneName, int sceneIndex, int highScore)
         {
             SceneName = sceneName;
             SceneIndex = sceneIndex;
+            HighScore = highScore;
         }
     }
 }

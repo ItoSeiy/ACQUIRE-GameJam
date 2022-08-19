@@ -289,6 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resultSceneName: Result
+  _sceneChangeTime: 1500
 --- !u!1 &5677578927266861921
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,6 +667,7 @@ MonoBehaviour:
   _initialSaveData:
     SceneName: Stage01
     SceneIndex: 0
+    HighScore: -100
   _sceneNames:
   - Stage01
   - Stage02

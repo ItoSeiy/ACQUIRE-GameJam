@@ -48,12 +48,14 @@ public class TimeManager : MonoBehaviour
 
     private async void CheckTimeOver()
     {
-        if (_timer >= 0f) return;
+        if (_timer > 0f) return;
 
         UpdateText(0);
         await _timeUpImage.DOFade(1f, _fadeTime).AsyncWaitForCompletion();
 
-        if(PointManager.Instance.CanWin)
+        if (GameManager.Instance.IsGameFinish) return;
+
+        if (PointManager.Instance.CanWin)
         {
             GameManager.Instance.GameClear();
         }
