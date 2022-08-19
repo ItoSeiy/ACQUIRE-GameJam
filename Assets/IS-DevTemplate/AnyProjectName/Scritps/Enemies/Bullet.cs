@@ -42,7 +42,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.name == "Player") 
         {
-            //collision.gameObject.GetComponent<Player>().Stan();
+            collision.gameObject.GetComponent<Player>().Stan(_stanTime);
             Destroy(gameObject);
         } 
     }

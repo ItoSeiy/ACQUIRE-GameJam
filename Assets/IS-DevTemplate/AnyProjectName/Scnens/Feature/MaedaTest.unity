@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 1632277805}
   - component: {fileID: 1632277806}
   m_Layer: 0
-  m_Name: PlayerSanple
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -492,8 +492,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d295af542b3758644a4a6d775b70aa8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedx: 0.1
-  _speedy: 0.05
+  _speedx: 0.05
+  _speedy: 0.03
 --- !u!58 &1632277806
 CircleCollider2D:
   m_ObjectHideFlags: 0

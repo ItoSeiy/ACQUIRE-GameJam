@@ -96,13 +96,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6471fbb971998bc43986759a2deab675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.01
+  _speed: 0.005
   _nextMoveTime: 2
   _width: 5
   _verticalWidth: 2.8
   _score: 0
+  _stanTime: 1
   _originScale: {x: 0.1, y: 0.1, z: 1}
   _shotInterbal: 5
+  _launchrPoint: []
   _centerPoint: {fileID: 0}
 --- !u!70 &1654430239275571059
 CapsuleCollider2D:

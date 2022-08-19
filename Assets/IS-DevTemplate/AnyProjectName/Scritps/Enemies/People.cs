@@ -26,11 +26,17 @@ public class People : MonoBehaviour
     [SerializeField, Tooltip("持っているスコア")]
     private int _score = 0;
 
+    [SerializeField, Tooltip("プレイヤーを気絶させる時間")]
+    private int _stanTime = 1;
+
     [SerializeField, Tooltip("初めに保持するスケール")]
     private Vector3 _originScale;
 
     [SerializeField, Tooltip("戦車の発射間隔")]
     private float _shotInterbal = 5;
+
+    [SerializeField, Tooltip("戦車が発射する砲筒の位置")]
+    private Transform[] _launchrPoint;
 
     /// <summary>スポーンの中心点</summary>
     public Transform _centerPoint = null;
@@ -57,7 +63,7 @@ public class People : MonoBehaviour
 
     private void Start()
     {
-        if(this.name == "Tank(Clone)") { _bullet = Resources.Load("Bullet") as GameObject; }
+        if (this.name == "Tank(Clone)") { _bullet = Resources.Load("Bullet") as GameObject; }
 
         _sp = GetComponent<SpriteRenderer>();
     }
@@ -76,13 +82,13 @@ public class People : MonoBehaviour
 
                 Vector3 playerPosition;
 
-                vero = transform.position.x < _centerPoint.position.x? new Vector3(_speed, 0, 0): new Vector3(-_speed, 0, 0);
+                vero = transform.position.x < _centerPoint.position.x ? new Vector3(_speed, 0, 0) : new Vector3(-_speed, 0, 0);
                 _sp.flipX = vero.x > 0 ? true : false;
                 transform.position += vero;
 
                 if (_timer > _nextMoveTime)//一定時間後それぞれの行動に移行
                 {
-                    if (this.name == "PeopleSanple(Clone)")//一般人はランダムに移動
+                    if (this.name == "CommonPeople(Clone)")//一般人はランダムに移動
                     {
                         _moveState = MoveState.RandamWalk;
                         _randomVelo = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0).normalized;
@@ -99,7 +105,7 @@ public class People : MonoBehaviour
                     {
                         _moveState = MoveState.Shot;
                         _player = FindObjectOfType<Player>().gameObject;
-                        _timer = 2;
+                        _timer = 7;
                     }
                 }
                 break;
@@ -111,7 +117,7 @@ public class People : MonoBehaviour
                     if (Random.Range(0, 2) < 1)
                     {
                         _randomVelo = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0).normalized;
-                        _sp.flipX = _randomVelo.x > 0 ? true : false;  
+                        _sp.flipX = _randomVelo.x > 0 ? true : false;
                         _timer = 0;
                     }
                 }
@@ -121,16 +127,14 @@ public class People : MonoBehaviour
                 playerPosition = new Vector3(_player.transform.position.x, _player.transform.position.y, transform.position.z);
                 transform.position = Vector3.MoveTowards(transform.position, playerPosition, _speed);
                 _sp.flipX = transform.position.x - playerPosition.x > 0 ? true : false;
-
-                if (Vector3.Distance(transform.position, playerPosition) < 0.1f) Destroy();
-
                 break;
 
             //戦車は動かずに一定間隔で弾を発射する
             case MoveState.Shot:
-                if (_timer > _shotInterbal) 
+                if (_timer > _shotInterbal)
                 {
-                    Instantiate(_bullet , transform.position , Quaternion.identity);
+                    if (!_sp.flipX) { Instantiate(_bullet, _launchrPoint[0].position, Quaternion.identity); }
+                    else {Instantiate(_bullet, _launchrPoint[1].position, Quaternion.identity);}
                     _timer = 0;
                 }
                 break;
@@ -148,6 +152,17 @@ public class People : MonoBehaviour
         if (transform.position.x > _width + 2 || transform.position.x < -_width - 2
             || transform.position.y > _verticalWidth + 2 || transform.position.y < -_verticalWidth - 2)
         { Destroy(); }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!_isActrive || name != "Yakuza(Clone)") { return; }
+
+        if (collision.gameObject.name == "Player")
+        {
+            collision.gameObject.GetComponent<Player>().Stan(_stanTime);
+            Destroy();
+        }
     }
 
     enum MoveState
