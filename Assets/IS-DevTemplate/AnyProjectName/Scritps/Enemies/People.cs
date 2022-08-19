@@ -184,9 +184,20 @@ public class People : MonoBehaviour
             ISDevTemplate.Sound.SoundManager.Instance.UseSFX("Hit");
             collision.gameObject.GetComponent<Player>().Stan(_stanTime);
         }
-
-        if (name == "CommonPeople(Clone)") _timer = 9999;
     }
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (name == "CommonPeople(Clone)" && collision.gameObject.name == "Player" 
+    //        || name == "CommonPeople(Clone)" && collision.gameObject.name == "Wall")
+    //    { 
+    //        _moveState = MoveState.RandamWalk;
+    //        _randomVelo = new Vector3(-_randomVelo.x, -_randomVelo.y, _randomVelo.z);
+    //        _timer = 0;
+    //    } 
+    //}
+
+
 
     enum MoveState
     {

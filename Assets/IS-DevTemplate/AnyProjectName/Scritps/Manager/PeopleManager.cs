@@ -39,31 +39,26 @@ public class PeopleManager : MonoBehaviour
             if (Random.Range(0, 2) < 1) respawnWidth = -_width;
             else respawnWidth = _width;
 
-            int randomInt = Random.Range(0, _typeCount + 3);
+            int randomInt = Random.Range(0, 101);
 
-            switch (randomInt)
+            if (randomInt < 80)
             {
-                case 0:
-                case 1:
-                case 2:
-                case 3:
-                    GameObject people = ISDevTemplate.Pool.ObjectPool.Instance.UseObject("CommonPeople", new Vector3(respawnWidth, Random.Range(-_verticalWidth, _verticalWidth), 4.7f));
-                    people.GetComponent<People>()._centerPoint = _centerPoint;
-                    people.GetComponent<People>().Create();
-                    break;
-
-                //case 4:
-                    ////GameObject yakuza = ISDevTemplate.Pool.ObjectPool.Instance.UseObject("Yakuza", new Vector3(respawnWidth, Random.Range(-_verticalWidth, _verticalWidth), 4.7f));
-                    ////yakuza.GetComponent<People>()._centerPoint = _centerPoint;
-                    ////yakuza.GetComponent<People>().Create();
-
-                    //GameObject Tank = ISDevTemplate.Pool.ObjectPool.Instance.UseObject("Tank", new Vector3(respawnWidth, Random.Range(_centerPoint.position.y - _verticalWidth, _centerPoint.position.y + _verticalWidth), 4.7f));
-                    //Tank.GetComponent<People>()._centerPoint = _centerPoint;
-                    //Tank.GetComponent<People>().Create();
-                    //break;
+                GameObject people = ISDevTemplate.Pool.ObjectPool.Instance.UseObject("CommonPeople", new Vector3(respawnWidth, Random.Range(-_verticalWidth, _verticalWidth), 4.7f));
+                people.GetComponent<People>()._centerPoint = _centerPoint;
+                people.GetComponent<People>().Create();
             }
-
-
+            else if (80 < randomInt && randomInt < 95)
+            {
+                GameObject yakuza = ISDevTemplate.Pool.ObjectPool.Instance.UseObject("Yakuza", new Vector3(respawnWidth, Random.Range(-_verticalWidth, _verticalWidth), 4.7f));
+                yakuza.GetComponent<People>()._centerPoint = _centerPoint;
+                yakuza.GetComponent<People>().Create();
+            }
+            else 
+            {
+                GameObject Tank = ISDevTemplate.Pool.ObjectPool.Instance.UseObject("Tank", new Vector3(respawnWidth, Random.Range(_centerPoint.position.y - _verticalWidth, _centerPoint.position.y + _verticalWidth), 4.7f));
+                Tank.GetComponent<People>()._centerPoint = _centerPoint;
+                Tank.GetComponent<People>().Create();
+            }
 
             _timer = 0;
         }

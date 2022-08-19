@@ -100,9 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.005
   _nextMoveTime: 2
-  _width: 5
-  _verticalWidth: 2.8
-  _score: 0
+  _width: 9.6
+  _verticalWidth: 3.11
+  _score: 50
   _stanTime: 1
   _originScale: {x: 0.5, y: 0.5, z: 0.5}
   _shotInterbal: 5
