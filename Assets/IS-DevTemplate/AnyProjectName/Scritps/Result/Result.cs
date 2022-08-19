@@ -67,13 +67,13 @@ public class Result : MonoBehaviour
     {
         if(_resultData.ResultType == ResultType.GameClear)
         {
-            _darkHeroWinImage.gameObject.SetActive(true);
+            _darkHeroWinImage.DOFade(1f, _imageFadeDuration);
             await UniTask.Delay(_imageChangeTime);
             _earthWinImage.DOFade(1f, _imageFadeDuration);
         }
         else
         {
-            _darkHereLoseImage.gameObject.SetActive(true);
+            _darkHereLoseImage.DOFade(1f, _imageFadeDuration);
             await UniTask.Delay(_imageChangeTime);
             _earthLoseImage.DOFade(1f, _imageFadeDuration);
         }

@@ -1,6 +1,8 @@
 using ISDevTemplate.Manager;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
+using Cysharp.Threading.Tasks;
 
 /// <summary>
 /// タイムの管理
@@ -19,6 +21,9 @@ public class TimeManager : MonoBehaviour
 
     [SerializeField]
     Image _timeUpImage;
+
+    [SerializeField]
+    private float _fadeTime = 0.5f;
 
     private float _timer;
 
@@ -41,12 +46,12 @@ public class TimeManager : MonoBehaviour
         _timer -= Time.deltaTime;
     }
 
-    private void CheckTimeOver()
+    private async void CheckTimeOver()
     {
         if (_timer >= 0f) return;
 
         UpdateText(0);
-        _timeUpImage.gameObject.SetActive(true);
+        await _timeUpImage.DOFade(1f, _fadeTime).AsyncWaitForCompletion();
 
         if(PointManager.Instance.CanWin)
         {
