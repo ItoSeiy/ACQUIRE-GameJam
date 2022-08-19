@@ -47,7 +47,7 @@ public class PeopleManager : MonoBehaviour
                 people.GetComponent<People>()._centerPoint = _centerPoint;
                 people.GetComponent<People>().Create();
             }
-            else if (99 < randomInt && randomInt < 99.5)
+            else if (97 < randomInt && randomInt < 99.5)
             {
                 GameObject yakuza = ISDevTemplate.Pool.ObjectPool.Instance.UseObject("Yakuza", new Vector3(respawnWidth, Random.Range(-_verticalWidth, _verticalWidth), 4.7f));
                 yakuza.GetComponent<People>()._centerPoint = _centerPoint;

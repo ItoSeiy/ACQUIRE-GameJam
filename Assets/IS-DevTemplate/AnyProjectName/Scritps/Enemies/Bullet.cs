@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
 
             _rot = Vector3.Scale(_player.transform.position - transform.position
                                                                         , new Vector3(1, 1, 0)).normalized;
-            this.transform.rotation = Quaternion.FromToRotation(-Vector3.right, _player.transform.position - transform.position);
+            this.transform.rotation = Quaternion.FromToRotation(-Vector3.right, new Vector3(_player.transform.position.x - transform.position.x, _player.transform.position.y - transform.position.y, 0));
 
             _sp.flipY = _rot.x > 0 ? true : false;
 
