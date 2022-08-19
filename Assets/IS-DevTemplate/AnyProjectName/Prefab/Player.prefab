@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedx: 0.1
-  _speedy: 0.05
+  _speedy: 0.1
   _animator: {fileID: 6962602849805398923}
 --- !u!50 &6962602849805398922
 Rigidbody2D:
