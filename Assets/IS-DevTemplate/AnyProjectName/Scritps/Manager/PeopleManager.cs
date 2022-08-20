@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class PeopleManager : MonoBehaviour
 {
@@ -41,7 +40,7 @@ public class PeopleManager : MonoBehaviour
 
             float randomInt = Random.Range(0f, 101f);
 
-            if (randomInt < 99)
+            if (randomInt < 97)
             {
                 GameObject people = ISDevTemplate.Pool.ObjectPool.Instance.UseObject("CommonPeople", new Vector3(respawnWidth, Random.Range(-_verticalWidth, _verticalWidth), 4.7f));
                 people.GetComponent<People>()._centerPoint = _centerPoint;

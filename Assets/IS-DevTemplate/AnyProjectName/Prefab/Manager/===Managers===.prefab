@@ -666,7 +666,7 @@ MonoBehaviour:
   _initialSaveData:
     SceneName: Stage01
     SceneIndex: 0
-    HighScore: -100
+    HighScore: 0
   _sceneNames:
   - Stage01
   - Stage02
