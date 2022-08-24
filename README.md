@@ -1,7 +1,5 @@
 # バーキュームエイリアン ~〇〇秒で人材救引
 
-- 企画概要の写真
-
 > 仕様書 https://docs.google.com/spreadsheets/d/1SNUcYJb6PMTXjih2x4HXbCnMzAFU2eI1/edit#gid=679880142
 
 ## 注意点
