@@ -8,6 +8,9 @@
 ## 投票数1位を獲得！
 <image width="500" src="https://user-images.githubusercontent.com/89116872/187943790-81714c8d-1c8e-4017-a039-6f60c5b58a96.jpg">
 
+## クレジット
+<image width="800" src="https://user-images.githubusercontent.com/89116872/187947997-987b6aca-d1e7-43a0-8acc-caf7f268a4ab.png">
+
 ## 開発環境
 
 | エンジン | バージョン  |
