@@ -32,7 +32,7 @@
 ### NaughtyAttributes
 > https://github.com/dbrizov/NaughtyAttributes
 
-## ゲームジャムなので下記の規則は無視でも構いません
+# ゲームジャムなので下記の規則は無視でも構いません
 
 ## コード規則
 
